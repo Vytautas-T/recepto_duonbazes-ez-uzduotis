@@ -1,4 +1,4 @@
-package lt.imones.puslapis.projektopavadinimas;
+package lt.imones.puslapis.projektopavadinimas.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

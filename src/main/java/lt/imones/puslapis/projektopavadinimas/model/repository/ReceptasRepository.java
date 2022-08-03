@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReceptasRepository  extends JpaRepository<Receptai, Integer> {
+public interface ReceptasRepository  extends JpaRepository<Receptai, Long> {
 
     Receptai FindByPavadinimas(String pavadinimas);
 
