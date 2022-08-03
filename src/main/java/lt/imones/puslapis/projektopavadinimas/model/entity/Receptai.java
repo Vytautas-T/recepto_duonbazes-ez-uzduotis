@@ -3,6 +3,7 @@ package lt.imones.puslapis.projektopavadinimas.model.entity;
 import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 public class Receptai {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
