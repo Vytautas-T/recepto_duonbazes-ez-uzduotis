@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ReceptasRepository  extends JpaRepository<Receptai, Long> {
 
-    Receptai FindByPavadinimas(String pavadinimas);
+    Receptai findByPavadinimas(String pavadinimas);
 
-    List<Receptai> FindByKainaBetween(double pradineKaina, double galutineKaina);
+    List<Receptai> findByKainaBetween(double pradineKaina, double galutineKaina);
 }

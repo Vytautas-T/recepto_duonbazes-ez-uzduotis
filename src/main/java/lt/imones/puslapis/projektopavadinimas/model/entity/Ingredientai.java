@@ -3,6 +3,7 @@ package lt.imones.puslapis.projektopavadinimas.model.entity;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Ingredientai {
@@ -14,14 +15,23 @@ public class Ingredientai {
     private  int kalorijosPer100g;
     private double kaina;
 
+    @ManyToMany
+    @JoinTable(
+            name = "receptai_ingredientai",
+            joinColumns = @JoinColumn(name = "ingredientas_id"),
+            inverseJoinColumns = @JoinColumn(name = "receptas_id")
+    )
+    private Set<Ingredientai> receptoIngredientai;
+
     public Ingredientai() {
     }
 
-    public Ingredientai(int id, String pavadinimas, int kalorijosPer100g, double kaina) {
+    public Ingredientai(int id, String pavadinimas, int kalorijosPer100g, double kaina, Set<Ingredientai> receptoIngredientai) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.kalorijosPer100g = kalorijosPer100g;
         this.kaina = kaina;
+        this.receptoIngredientai = receptoIngredientai;
     }
 
     public int getId() {
@@ -56,14 +66,22 @@ public class Ingredientai {
         this.kaina = kaina;
     }
 
+    public Set<Ingredientai> getReceptoIngredientai() {
+        return receptoIngredientai;
+    }
+
+    public void setReceptoIngredientai(Set<Ingredientai> receptoIngredientai) {
+        this.receptoIngredientai = receptoIngredientai;
+    }
+
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "Ingredientai{" +
                 "id=" + id +
                 ", pavadinimas='" + pavadinimas + '\'' +
                 ", kalorijosPer100g=" + kalorijosPer100g +
                 ", kaina=" + kaina +
+                ", receptoIngredientai=" + receptoIngredientai +
                 '}';
     }
 }
