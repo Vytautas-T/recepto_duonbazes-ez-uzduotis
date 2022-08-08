@@ -13,6 +13,12 @@ public class ReceptasController {
     @Autowired
     ReceptasRepository receptasRepository;
 
+    @GetMapping("/recep/gauti_id")
+    Receptai gautiPagalPavadinimas(@RequestParam long id) {
+        System.out.println(id);
+        return receptasRepository.findById(id);
+    }
+
     @GetMapping("/recep/gauti_pav")
     Receptai gautiPagalPavadinimas(@RequestParam String pavadinimas){
         System.out.println(pavadinimas);
@@ -23,3 +29,6 @@ public class ReceptasController {
         return "šis puslapis veikia";
     }
 }
+
+
+//http://localhost:8080
