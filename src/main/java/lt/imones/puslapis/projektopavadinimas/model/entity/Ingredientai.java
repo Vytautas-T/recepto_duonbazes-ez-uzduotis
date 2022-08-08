@@ -1,5 +1,7 @@
 package lt.imones.puslapis.projektopavadinimas.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class Ingredientai {
     private  int kalorijosPer100g;
     private double kaina;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "receptai_ingredientai",

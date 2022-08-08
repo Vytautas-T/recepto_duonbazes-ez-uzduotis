@@ -14,7 +14,7 @@ public class ReceptasController {
     ReceptasRepository receptasRepository;
 
     @GetMapping("/recep/gauti_id")
-    Receptai gautiPagalPavadinimas(@RequestParam long id) {
+    Receptai gautiPagalId(@RequestParam long id) {
         System.out.println(id);
         return receptasRepository.findById(id);
     }
@@ -23,6 +23,11 @@ public class ReceptasController {
     Receptai gautiPagalPavadinimas(@RequestParam String pavadinimas){
         System.out.println(pavadinimas);
         return receptasRepository.findByPavadinimas(pavadinimas);
+    }
+
+    @GetMapping("/recep/gauti_kaina")
+    Receptai gautiPagalKaina(@RequestParam double kaina){
+        return receptasRepository.findByKaina(kaina);
     }
     @GetMapping("/test/greeting")
     String testinisEndpoint() {

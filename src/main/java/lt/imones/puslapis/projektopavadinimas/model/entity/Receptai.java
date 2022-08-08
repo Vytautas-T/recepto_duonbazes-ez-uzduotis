@@ -1,5 +1,7 @@
 package lt.imones.puslapis.projektopavadinimas.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -21,15 +23,19 @@ public class Receptai {
     )
     private Set<Ingredientai> receptoIngredientai;
 
+
     @ManyToOne
     @JoinColumn(name = "vartotojas_id")
     private Vartotojai receptoKurejas;
 
+    @ManyToOne
+    @JoinColumn(name = "kategorija_id")
+            private Kategorija receptoKategorija;
 
     public Receptai() {
     }
 
-    public Receptai(long id, String pavadinimas, String nurodymai, int kalorijosPer100g, double kaina, Set<Ingredientai> receptoIngredientai, Vartotojai receptoKurejas) {
+    public Receptai(long id, String pavadinimas, String nurodymai, int kalorijosPer100g, double kaina, Set<Ingredientai> receptoIngredientai, Vartotojai receptoKurejas, Kategorija receptoKategorija) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.nurodymai = nurodymai;
@@ -37,6 +43,7 @@ public class Receptai {
         this.kaina = kaina;
         this.receptoIngredientai = receptoIngredientai;
         this.receptoKurejas = receptoKurejas;
+        this.receptoKategorija = receptoKategorija;
     }
 
     public long getId() {
@@ -95,6 +102,14 @@ public class Receptai {
         this.receptoKurejas = receptoKurejas;
     }
 
+    public Kategorija getReceptoKategorija() {
+        return receptoKategorija;
+    }
+
+    public void setReceptoKategorija(Kategorija receptoKategorija) {
+        this.receptoKategorija = receptoKategorija;
+    }
+
     @Override
     public String toString() {
         return "Receptai{" +
@@ -105,6 +120,7 @@ public class Receptai {
                 ", kaina=" + kaina +
                 ", receptoIngredientai=" + receptoIngredientai +
                 ", receptoKurejas=" + receptoKurejas +
+                ", receptoKategorija=" + receptoKategorija +
                 '}';
     }
 }

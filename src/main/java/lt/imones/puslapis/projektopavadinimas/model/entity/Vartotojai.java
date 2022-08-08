@@ -1,5 +1,7 @@
 package lt.imones.puslapis.projektopavadinimas.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,6 +14,7 @@ public class Vartotojai {
     String username;
     String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "receptoKurejas")
     Set<Receptai> vartotojoReceptai;
 
