@@ -9,7 +9,7 @@ import java.util.Set;
 public class Vartotojai {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String username;
     String password;

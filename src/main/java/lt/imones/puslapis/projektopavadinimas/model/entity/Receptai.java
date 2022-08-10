@@ -24,6 +24,7 @@ public class Receptai {
     private Set<Ingredientai> receptoIngredientai;
 
 
+
     @ManyToOne
     @JoinColumn(name = "vartotojas_id")
     private Vartotojai receptoKurejas;
