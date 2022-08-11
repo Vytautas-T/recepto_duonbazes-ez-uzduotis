@@ -43,9 +43,13 @@
         </td>
     </tr>
     <tr>
+
         <th>Recepto kurejas</th>
         <td th:text="${receptoKurejas.getUsername}"></td>
     </tr>
 </table>
+<form th:action="@{/recep/paieska}">
+<button class="btn btn-secondary" type="submit">Eiti Atgal</button>
+</form>
 </body>
 </html>
