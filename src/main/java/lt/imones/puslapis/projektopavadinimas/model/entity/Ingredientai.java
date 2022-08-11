@@ -82,7 +82,7 @@ public class Ingredientai {
                 ", pavadinimas='" + pavadinimas + '\'' +
                 ", kalorijosPer100g=" + kalorijosPer100g +
                 ", kaina=" + kaina +
-                ", receptoIngredientai=" + receptaiKuriuoseYraSitasIngredientas +
+
                 '}';
     }
 }

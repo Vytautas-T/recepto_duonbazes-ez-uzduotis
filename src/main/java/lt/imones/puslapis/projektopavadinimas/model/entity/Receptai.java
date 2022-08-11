@@ -1,6 +1,9 @@
 package lt.imones.puslapis.projektopavadinimas.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lt.imones.puslapis.projektopavadinimas.model.repository.ReceptasRepository;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -32,6 +35,7 @@ public class Receptai {
     @ManyToOne
     @JoinColumn(name = "kategorija_id")
             private Kategorija receptoKategorija;
+
 
     public Receptai() {
     }
