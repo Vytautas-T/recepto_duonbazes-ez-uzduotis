@@ -13,11 +13,11 @@ public class KategorijosController {
     @Autowired
     KategorijosRepository kategorijosRepository;
 
-    @PostMapping ("/kategorija/ideti")
-    String idetiKategorija(String pavadinimas){
-        Kategorija naujaKategorija = new Kategorija();
-        naujaKategorija.setPavadinimas(pavadinimas);
-        kategorijosRepository.save(naujaKategorija);
-        return "Kategorija" + pavadinimas + "ideta sekmingai";
-    }
+   @PostMapping ("/testinits/ideti")
+   String idetiKategorija(String pavadinimas){
+       Kategorija naujaKategorija = new Kategorija();
+       naujaKategorija.setPavadinimas(pavadinimas);
+       kategorijosRepository.save(naujaKategorija);
+       return "Kategorija " + pavadinimas + " ideta sekmingai";
+   }
 }
