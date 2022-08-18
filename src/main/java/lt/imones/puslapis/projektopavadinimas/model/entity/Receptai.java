@@ -36,6 +36,14 @@ public class Receptai {
     @JoinColumn(name = "kategorija_id")
             private Kategorija receptoKategorija;
 
+    @ManyToMany
+    @JoinTable(
+            name = "vartotoju_megstami_receptai",
+            joinColumns = @JoinColumn(name = "receptas_id"),
+            inverseJoinColumns = @JoinColumn(name = "vartotojo_id")
+    )
+    private Set<Vartotojai> vartotojaiKurieMegsta;
+
 
     public Receptai() {
     }

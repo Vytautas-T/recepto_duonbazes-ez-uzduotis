@@ -51,9 +51,13 @@
 <form th:action="@{/recep/paieska}">
 <button class="btn btn-secondary" type="submit">Eiti i receptu paieska pagal pavadinima</button>
 </form>
-<div> <p> </p></div>
+<br>
 <form th:action="@{/kategorijos/rodyti_receptus?id=2}">
     <button class="btn btn-secondary" type="submit">Eiti i paieska pagal kategorija id 2</button>
+</form>
+<br>
+<form th:action="@{'/vartotojas/pamegti_recepta/' + ${id}}" method="post">
+    <input type="submit" value="Pridėti receptą į mėgstamus">
 </form>
 </body>
 </html>

@@ -18,6 +18,14 @@ public class Vartotojai {
     @OneToMany(mappedBy = "receptoKurejas")
     Set<Receptai> vartotojoReceptai;
 
+    @ManyToMany
+    @JoinTable(
+            name = "vartotoju_megstami_receptai",
+            joinColumns = @JoinColumn(name = "vartotojo_id"),
+            inverseJoinColumns = @JoinColumn(name = "receptas_id")
+    )
+    private Set<Receptai> megstamiReceptai;
+
     public Vartotojai() {
     }
 
