@@ -19,11 +19,16 @@
         <input th:field="*{nurodymai}" type="text"  placeholder="Recepto nurodymai" class="form-control mb-4 col-4">
         <input th:field="*{kalorijosPer100g}" type="text"  placeholder="Recepto kalorijos per 100g" class="form-control mb-4 col-4">
         <input th:field="*{kaina}" type="text"  placeholder="Recepto kaina" class="form-control mb-4 col-4">
-        <button type="submit" class="btn btn-info col-2">Išsaugokite receptą</button>
-        <!--<select th:field="*{receptoKategorija}" class="form-control" id="dropDownList">
+        <select th:field="*{receptoKategorija}" class="form-control" id="dropDownList">
             <option value="0">Pasirinkite kategoriją</option>
             <option th:each="kategorija : ${kategorijos}" th:value="${kategorija.getId()}" th:text="${kategorija.getPavadinimas()}"></option>
-        </select>-->
+        </select>
+        <br>
+        <select th:field="*{receptoKurejas}" class="form-control" id="dropDownList2">
+            <option value="0">Pasirinkite kureja</option>
+            <option th:each="vartotojas : ${vartotojei}" th:value="${vartotojas.getId()}" th:text="${vartotojas.getUsername()}"></option>
+        </select>
+
         <button type="submit" class="btn btn-info col-2">Išsaugokite receptą</button>
 
     </form>
