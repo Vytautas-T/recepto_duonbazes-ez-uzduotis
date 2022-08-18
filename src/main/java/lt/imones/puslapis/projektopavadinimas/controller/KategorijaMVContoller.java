@@ -31,7 +31,7 @@ public class KategorijaMVContoller {
         Kategorija kategorija = kategorijosRepository.findById(id);
         model.addAttribute("kategorijosReceptai" , kategorija.getKategorijosReceptai());
         model.addAttribute("kategorijosPavadinimas" , kategorija.getPavadinimas());
-        return "kategorijos_receptai";
+        return "kategorijos_receptai.html";
     }
 
     @PostMapping("/kategorija/ideti_kategorija")

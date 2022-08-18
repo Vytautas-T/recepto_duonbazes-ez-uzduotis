@@ -1,11 +1,14 @@
 package lt.imones.puslapis.projektopavadinimas.controller;
 
 import lt.imones.puslapis.projektopavadinimas.model.entity.Receptai;
+import lt.imones.puslapis.projektopavadinimas.model.repository.KategorijosRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.ReceptasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -13,6 +16,8 @@ public class ReceptasMVController {
 
     @Autowired
     ReceptasRepository receptasRepository;
+    @Autowired
+    KategorijosRepository kategorijosRepository;
 
     @GetMapping("/test/sveikinimas")
     String testineFuncija(Model model, @RequestParam String vardas){
@@ -51,5 +56,19 @@ public class ReceptasMVController {
         return "rasti_recepta.html";
     }
 
+    @GetMapping("/recepto/recepto_idejimas")
+    String receptoIdejimas(Model model){
+        Receptai receptas = new Receptai();
+        model.addAttribute("receptas", receptas);
+        model.addAttribute("kategorijos", kategorijosRepository.findAll());
+        return "ideti_recepta.html";
+    }
+
+    @PostMapping("/recepto/idejo_recepta")
+    String pridetiRecepta(@ModelAttribute Receptai ivedamasReceptas){
+        receptasRepository.save(ivedamasReceptas);
+        System.out.println(ivedamasReceptas);
+        return "idetas_receptas.html";
+    }
 
 }

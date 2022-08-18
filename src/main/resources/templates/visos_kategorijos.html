@@ -14,7 +14,8 @@
 </head>
 <body>
 <div th:each="kategorija : ${visosKategorijos}" class="list-group">
-    <a th:text="${kategorija.getPavadinimas()}" href="#" class="list-group-item list-group-item-action"></a>
+    <a th:text="${kategorija.getPavadinimas()}" th:href="@{/kategorijos/rodyti_receptus/(id=${kategorija.getId()})}" class="list-group-item list-group-item-action"></a>
+
 </div>
 </body>
 </html>

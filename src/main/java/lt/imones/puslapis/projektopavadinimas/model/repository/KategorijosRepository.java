@@ -10,4 +10,5 @@ public interface KategorijosRepository extends JpaRepository<Kategorija, Long> {
     Kategorija findById(long id);
 
     Kategorija findByPavadinimas(String pacadinimas);
+
 }
