@@ -2,7 +2,9 @@ package lt.imones.puslapis.projektopavadinimas.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -36,6 +38,7 @@ public class Vartotojai {
         this.vartotojoReceptai = vartotojoReceptai;
     }
 
+
     public int getId() {
         return id;
     }
@@ -67,6 +70,15 @@ public class Vartotojai {
     public void setVartotojoReceptai(Set<Receptai> vartotojoReceptai) {
         this.vartotojoReceptai = vartotojoReceptai;
     }
+
+    public Set<Receptai> getMegstamiReceptai() {
+        return megstamiReceptai;
+    }
+
+    public void setMegstamiReceptai(Set<Receptai> megstamiReceptai) {
+        this.megstamiReceptai = megstamiReceptai;
+    }
+
 
     @Override
     public String toString() {

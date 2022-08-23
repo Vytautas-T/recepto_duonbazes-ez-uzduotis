@@ -5,7 +5,9 @@ import lt.imones.puslapis.projektopavadinimas.model.repository.ReceptasRepositor
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -43,7 +45,6 @@ public class Receptai {
             inverseJoinColumns = @JoinColumn(name = "vartotojo_id")
     )
     private Set<Vartotojai> vartotojaiKurieMegsta;
-
 
     public Receptai() {
     }
@@ -123,6 +124,14 @@ public class Receptai {
         this.receptoKategorija = receptoKategorija;
     }
 
+    public Set<Vartotojai> getVartotojaiKurieMegsta() {
+        return vartotojaiKurieMegsta;
+    }
+
+    public void setVartotojaiKurieMegsta(Set<Vartotojai> vartotojaiKurieMegsta) {
+        this.vartotojaiKurieMegsta = vartotojaiKurieMegsta;
+    }
+
     @Override
     public String toString() {
         return "Receptai{" +
@@ -134,6 +143,7 @@ public class Receptai {
                 ", receptoIngredientai=" + receptoIngredientai +
                 ", receptoKurejas=" + receptoKurejas +
                 ", receptoKategorija=" + receptoKategorija +
+                ", vartotojaiKurieMegsta=" + vartotojaiKurieMegsta +
                 '}';
     }
 }

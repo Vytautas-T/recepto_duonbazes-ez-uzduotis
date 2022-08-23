@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VartotojoRepository extends JpaRepository<Vartotojai, Integer> {
+
+    Vartotojai findById(int id);
 }

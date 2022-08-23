@@ -24,26 +24,14 @@ public class ReceptasMVController {
     VartotojoRepository vartotojoRepository;
 
     @GetMapping("/test/sveikinimas")
-    String testineFuncija(Model model, @RequestParam String vardas){
+    String testineFuncija(Model model, @RequestParam String vardas) {
         model.addAttribute("vardas", vardas);
         return "testinis_puslapis.html";
     }
 
-    @GetMapping("/testinis/tikras")
-    String testReceptas(Model model) {
-        Receptai receptai = receptasRepository.findById(2);
-        model.addAttribute("pavadinimas", receptai.getPavadinimas());
-        model.addAttribute("nurodymai", receptai.getNurodymai());
-        model.addAttribute("kaina", receptai.getKaina());
-        model.addAttribute("kalorijosPer100g", receptai.getKalorijosPer100g());
-        model.addAttribute("receptoIngredientai", receptai.getReceptoIngredientai());
-        model.addAttribute("receptoKategorija", receptai.getReceptoKategorija());
-        model.addAttribute("receptoKurejas", receptai.getReceptoKurejas());
-        return "parodyti_recepta.html";
-    }
 
     @GetMapping("/rasti/recepta")
-    String ieskomasReceptas(Model model,@RequestParam String pavadinimas) {
+    String ieskomasReceptas(Model model, @RequestParam String pavadinimas) {
         Receptai receptas = receptasRepository.findByPavadinimas(pavadinimas);
         model.addAttribute("pavadinimas", receptas.getPavadinimas());
         model.addAttribute("nurodymai", receptas.getNurodymai());
@@ -61,7 +49,7 @@ public class ReceptasMVController {
     }
 
     @GetMapping("/recepto/recepto_idejimas")
-    String receptoIdejimas(Model model){
+    String receptoIdejimas(Model model) {
         Receptai receptas = new Receptai();
         model.addAttribute("receptas", receptas);
         model.addAttribute("kategorijos", kategorijosRepository.findAll());
@@ -70,9 +58,16 @@ public class ReceptasMVController {
     }
 
     @PostMapping("/recepto/idejo_recepta")
-    String pridetiRecepta(@ModelAttribute Receptai ivedamasReceptas){
+    String pridetiRecepta(@ModelAttribute Receptai ivedamasReceptas) {
         receptasRepository.save(ivedamasReceptas);
         return "idetas_receptas.html";
     }
 
+    @GetMapping("/recep/redaguoti_recepta")
+    String redaguotiRecepta(Model model) {
+        Receptai receptas = receptasRepository.findById(1);
+        model.addAttribute("receptas", receptas);
+        model.addAttribute("kategorijos", kategorijosRepository.findAll());
+        return "recepto_redagavimas.html";
+    }
 }

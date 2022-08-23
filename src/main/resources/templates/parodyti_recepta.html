@@ -52,8 +52,8 @@
 <button class="btn btn-secondary" type="submit">Eiti i receptu paieska pagal pavadinima</button>
 </form>
 <br>
-<form th:action="@{/kategorijos/rodyti_receptus?id=2}">
-    <button class="btn btn-secondary" type="submit">Eiti i paieska pagal kategorija id 2</button>
+<form th:action="@{'/recep/istrinti_recepta/' + ${id}}" method="post">
+    <input type="submit" value="Ištrinti receptą">
 </form>
 <br>
 <form th:action="@{'/vartotojas/pamegti_recepta/' + ${id}}" method="post">
