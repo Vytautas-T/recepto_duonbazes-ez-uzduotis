@@ -59,5 +59,13 @@
 <form th:action="@{'/vartotojas/pamegti_recepta/' + ${id}}" method="post">
     <input type="submit" value="Pridėti receptą į mėgstamus">
 </form>
+<br>
+<form th:action="@{'/recep/ideti_ingredientus/' + ${id}}" method="get">
+    <input type="submit" value="Pridėti recepto ingredientus">
+</form>
+<br>
+<form th:action="@{'/recep/redaguoti_recepta/' + ${id}}" method="get">
+    <input type="submit" value="Redaguoti receptą">
+</form>
 </body>
 </html>

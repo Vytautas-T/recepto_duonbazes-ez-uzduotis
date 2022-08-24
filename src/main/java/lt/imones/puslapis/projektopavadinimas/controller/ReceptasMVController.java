@@ -7,10 +7,7 @@ import lt.imones.puslapis.projektopavadinimas.model.repository.VartotojoReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ReceptasMVController {
@@ -33,6 +30,7 @@ public class ReceptasMVController {
     @GetMapping("/rasti/recepta")
     String ieskomasReceptas(Model model, @RequestParam String pavadinimas) {
         Receptai receptas = receptasRepository.findByPavadinimas(pavadinimas);
+        model.addAttribute("id", receptas.getId());
         model.addAttribute("pavadinimas", receptas.getPavadinimas());
         model.addAttribute("nurodymai", receptas.getNurodymai());
         model.addAttribute("kalorijosPer100g", receptas.getKalorijosPer100g());
@@ -57,17 +55,29 @@ public class ReceptasMVController {
         return "ideti_recepta.html";
     }
 
-    @PostMapping("/recepto/idejo_recepta")
+    @PostMapping("/receptas/idejo_recepta")
     String pridetiRecepta(@ModelAttribute Receptai ivedamasReceptas) {
         receptasRepository.save(ivedamasReceptas);
         return "idetas_receptas.html";
     }
 
-    @GetMapping("/recep/redaguoti_recepta")
-    String redaguotiRecepta(Model model) {
-        Receptai receptas = receptasRepository.findById(1);
+    @GetMapping("/recep/redaguoti_recepta/{id}")
+    String redaguotiRecepta(Model model, @PathVariable long id) {
+        Receptai receptas = receptasRepository.findById(id);
         model.addAttribute("receptas", receptas);
         model.addAttribute("kategorijos", kategorijosRepository.findAll());
         return "recepto_redagavimas.html";
+    }
+
+    @PostMapping("/recep/istrinti_recepta/{id}")
+    String istrintiRecepta(Model model, @PathVariable long id) {
+        receptasRepository.delete(receptasRepository.findById(id));
+        return "istrintas_receptas.html";
+    }
+
+    @GetMapping("/recep/ideti_ingredientus/{id}")
+    String idetiIngredientus(Model model, @PathVariable long id) {
+      //  model.addAttribute("pavadinimas", )
+        return "ingredientu_idejimas.html";
     }
 }
