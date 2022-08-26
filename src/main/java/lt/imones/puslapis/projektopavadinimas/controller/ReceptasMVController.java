@@ -1,9 +1,13 @@
 package lt.imones.puslapis.projektopavadinimas.controller;
 
+import lt.imones.puslapis.projektopavadinimas.model.dto.IngredientaiDto;
+import lt.imones.puslapis.projektopavadinimas.model.entity.Ingredientai;
 import lt.imones.puslapis.projektopavadinimas.model.entity.Receptai;
+import lt.imones.puslapis.projektopavadinimas.model.repository.IngredientaiRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.KategorijosRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.ReceptasRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.VartotojoRepository;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +23,9 @@ public class ReceptasMVController {
 
     @Autowired
     VartotojoRepository vartotojoRepository;
+
+    @Autowired
+    IngredientaiRepository ingredienturepository;
 
     @GetMapping("/test/sveikinimas")
     String testineFuncija(Model model, @RequestParam String vardas) {
@@ -75,9 +82,21 @@ public class ReceptasMVController {
         return "istrintas_receptas.html";
     }
 
-    @GetMapping("/recep/ideti_ingredientus/{id}")
+    @GetMapping("/recep/funcija1/{id}")
     String idetiIngredientus(Model model, @PathVariable long id) {
-      //  model.addAttribute("pavadinimas", )
+        IngredientaiDto ivedamasObjiektas = new IngredientaiDto();
+        model.addAttribute("ingredientai", ivedamasObjiektas);
         return "ingredientu_idejimas.html";
+    }
+
+    @PostMapping("/recep/funcija2")
+    String ingreIdetas(Model model, @ModelAttribute IngredientaiDto ingredientai) {
+        ingredientai.setIsskaldytiPavadinimai(ingredientai.getPavadinimai().split(","));
+        for (String s : ingredientai.getIsskaldytiPavadinimai()) {
+            System.out.println(ingredienturepository.findByPavadinimas(s));
+            
+        }
+        System.out.println(ingredientai);
+        return "puslapis2.html";
     }
 }
