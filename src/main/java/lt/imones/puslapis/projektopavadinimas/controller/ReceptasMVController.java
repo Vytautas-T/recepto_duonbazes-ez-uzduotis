@@ -7,11 +7,13 @@ import lt.imones.puslapis.projektopavadinimas.model.repository.IngredientaiRepos
 import lt.imones.puslapis.projektopavadinimas.model.repository.KategorijosRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.ReceptasRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.VartotojoRepository;
-import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class ReceptasMVController {
@@ -82,21 +84,28 @@ public class ReceptasMVController {
         return "istrintas_receptas.html";
     }
 
-    @GetMapping("/recep/funcija1/{id}")
-    String idetiIngredientus(Model model, @PathVariable long id) {
+    @GetMapping("/recep/ideti_ingredientus/{id}")
+    String idetiIngredientus(Model model, @PathVariable long id, IngredientaiDto ingredientas) {
         IngredientaiDto ivedamasObjiektas = new IngredientaiDto();
+        ivedamasObjiektas.setReceptoId(id);
         model.addAttribute("ingredientai", ivedamasObjiektas);
+        System.out.println(ivedamasObjiektas);
         return "ingredientu_idejimas.html";
     }
 
-    @PostMapping("/recep/funcija2")
+    @PostMapping("/recep/ideti_ingredientus")
     String ingreIdetas(Model model, @ModelAttribute IngredientaiDto ingredientai) {
+        Receptai isaugomasReceptas = receptasRepository.findById(ingredientai.getReceptoId());
+        Ingredientai vienasIngre;
         ingredientai.setIsskaldytiPavadinimai(ingredientai.getPavadinimai().split(","));
+        Set<Ingredientai> ingreSet = isaugomasReceptas.getReceptoIngredientai();
         for (String s : ingredientai.getIsskaldytiPavadinimai()) {
             System.out.println(ingredienturepository.findByPavadinimas(s));
-            
+            vienasIngre = ingredienturepository.findByPavadinimas(s);
+            ingreSet.add(vienasIngre);
         }
-        System.out.println(ingredientai);
+        isaugomasReceptas.setReceptoIngredientai(ingreSet);
+        receptasRepository.save(isaugomasReceptas);
         return "puslapis2.html";
     }
 }

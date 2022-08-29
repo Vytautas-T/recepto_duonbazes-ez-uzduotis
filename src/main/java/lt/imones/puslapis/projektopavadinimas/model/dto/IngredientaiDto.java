@@ -1,9 +1,15 @@
 package lt.imones.puslapis.projektopavadinimas.model.dto;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
+
 public class IngredientaiDto {
     String pavadinimai;
 
     String[] isskaldytiPavadinimai;
+
+    long receptoId;
+
     public IngredientaiDto() {
     }
 
@@ -27,10 +33,20 @@ public class IngredientaiDto {
         this.isskaldytiPavadinimai = isskaldytiPavadinimai;
     }
 
+    public long getReceptoId() {
+        return receptoId;
+    }
+
+    public void setReceptoId(long receptoId) {
+        this.receptoId = receptoId;
+    }
+
     @Override
     public String toString() {
         return "IngredientaiDto{" +
                 "pavadinimai='" + pavadinimai + '\'' +
+                ", isskaldytiPavadinimai=" + Arrays.toString(isskaldytiPavadinimai) +
+                ", receptoId=" + receptoId +
                 '}';
     }
 }

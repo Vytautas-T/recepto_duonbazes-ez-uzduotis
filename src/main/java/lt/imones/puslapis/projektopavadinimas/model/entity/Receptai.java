@@ -1,13 +1,6 @@
 package lt.imones.puslapis.projektopavadinimas.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lt.imones.puslapis.projektopavadinimas.model.repository.ReceptasRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.management.relation.Role;
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
