@@ -7,6 +7,7 @@ import lt.imones.puslapis.projektopavadinimas.model.repository.IngredientaiRepos
 import lt.imones.puslapis.projektopavadinimas.model.repository.KategorijosRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.ReceptasRepository;
 import lt.imones.puslapis.projektopavadinimas.model.repository.VartotojoRepository;
+import lt.imones.puslapis.projektopavadinimas.service.ReceptoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class ReceptasMVController {
 
     @Autowired
     IngredientaiRepository ingredienturepository;
+
+    @Autowired
+    ReceptoService receptoService;
 
     @GetMapping("/test/sveikinimas")
     String testineFuncija(Model model, @RequestParam String vardas) {
@@ -96,14 +100,7 @@ public class ReceptasMVController {
     @PostMapping("/recep/ideti_ingredientus")
     String ingreIdetas(Model model, @ModelAttribute IngredientaiDto ingredientai) {
         Receptai isaugomasReceptas = receptasRepository.findById(ingredientai.getReceptoId());
-        Ingredientai vienasIngre;
-        ingredientai.setIsskaldytiPavadinimai(ingredientai.getPavadinimai().split(","));
-        Set<Ingredientai> ingreSet = isaugomasReceptas.getReceptoIngredientai();
-        for (String s : ingredientai.getIsskaldytiPavadinimai()) {
-            System.out.println(ingredienturepository.findByPavadinimas(s));
-            vienasIngre = ingredienturepository.findByPavadinimas(s);
-            ingreSet.add(vienasIngre);
-        }
+        Set<Ingredientai> ingreSet = receptoService.KonvertavimasIsStringISet(ingredientai.getPavadinimai());
         isaugomasReceptas.setReceptoIngredientai(ingreSet);
         receptasRepository.save(isaugomasReceptas);
         return "puslapis2.html";
